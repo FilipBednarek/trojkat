@@ -1,4 +1,5 @@
 const btn = document.querySelector('#btn');
+const display = document.querySelector('#display');
 
 let arr = [];
 
@@ -8,32 +9,49 @@ btn.addEventListener('click', function (e) {
   const first = document.querySelector('#first');
   const second = document.querySelector('#second');
   const third = document.querySelector('#third');
-  const display = document.querySelector('#display');
 
+  if (
+    Number.isNaN(Number(first.value)) == false &&
+    first.value != '' &&
+    Number.isNaN(Number(second.value)) == false &&
+    second.value != '' &&
+    Number.isNaN(Number(third.value)) == false &&
+    third.value != ''
+  ) {
+    const arr = [
+      parseInt(first.value),
+      parseInt(second.value),
+      parseInt(third.value),
+    ];
 
-  if (Number.isNaN(Number(first.value)) == false && first.value != "" && Number.isNaN(Number(second.value)) == false && second.value != ""  && Number.isNaN(Number(third.value)) == false && third.value != "" ) {
-
-    const arr = [first.value, second.value,third.value];
-      
     const [a, b, c] = arr.sort((a, b) => a - b);
-    console.log(a, b, c);
+    // console.log(a + b + c);
 
-    if ( a**2 + b**2 > c**2) {
-        display.innerHTML = `<a href="/img/ostry.jpg"></a>`
-        console.log('1')
-    } if (a**2+ b**2 == c**2) {
-        display.innerHTML = `<a href="/img/prosty.jpg"></a>`
-        console.log('2')
-    } else {
-        display.innerHTML = `<a href="/img/rozwarty.jpg"></a>`
-        console.log('3')
+    let h = (a + b + c) * 0.5;
+    console.log(h);
+
+    let aa = a.toFixed(2);
+    let bb = b.toFixed(2);
+    let cc = c.toFixed(2);
+
+    let P = Math.sqrt(h * (h - a) * (h - b) * (h - c));
+    if (Math.pow(a, 2) + Math.pow(b, 2) > Math.pow(c, 2)) {
+      display.innerHTML = `<img src="/img/ostry.jpg"/>
+        <p>Pole trójkąta wynosi: ${P}  </p>`;
+      // console.log('1')
     }
-
-    console.log('jest liczba');
+    if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2)) {
+      display.innerHTML = `<img src="/img/prosty.jpg"/>
+        <p>Pole trójkąta wynosi: ${P}  </p>`;
+      // console.log('2')
+    } else if (Math.pow(a, 2) + Math.pow(b, 2) < Math.pow(c, 2)) {
+      display.innerHTML = `<img src="/img/rozwarty.jpg"/>
+        <p>Pole trójkąta wynosi: ${P}  </p>`;
+      // console.log('3')
+    }
+    // console.log('jest liczba');
   } else {
     display.innerHTML = `Wpisz poprawnie liczby`;
-    console.log('nie ma');
+    // console.log('nie ma');
   }
-
-
 });
